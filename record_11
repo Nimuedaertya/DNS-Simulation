@@ -1,0 +1,6 @@
+telematik.,SOA,100,127.0.0.40
+ns.switch.telematik.,A,300,127.0.0.44
+ns.router.telematik.,A,300,127.0.0.47
+switch.telematik.,NS,300,ns.switch.telematik.
+router.telematik.,NS,300,ns.router.telematik.
+telematik.,MX,300,.mail.telematik.
