@@ -1,5 +1,0 @@
-pcpools.fuberlin.,SOA,300,127.0.0.33
-pcpools.fuberlin.,A,300,127.0.0.34
-linux.pcpools.fuberlin.,A,300,127.0.0.35
-macos.pcpools.fuberlin.,A,300,127.0.0.36
-windows.pcpools.fuberlin.A,300,127.0.0.37
