@@ -1,0 +1,6 @@
+fuberlin.,SOA,300,127.0.0.30
+fuberlin.,A,300,127.0.0.31
+homework.fuberlin.,NS,300,ns.homework.fuberlin.
+pcpools.fuberlin.,NS,300,ns.pcpools.fuberlin.
+ns.pcpools.fuberlin.,A,300,127.0.0.33
+ns.homework.fuberlin.,A,300,127.0.0.57
