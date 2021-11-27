@@ -1,0 +1,5 @@
+.,SOA,100,127.0.0.11
+fuberlin.,NS,300,ns.fuberlin.
+telematik.,NS,300,ns.telematik.
+ns.fuberlin.,A,300,127.0.0.30
+ns.telematik.,A,300,127.0.0.40

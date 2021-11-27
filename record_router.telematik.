@@ -1,0 +1,4 @@
+router.telematik.,SOA,100,127.0.0.47
+router.telematik,A,300,127.0.0.48
+news.router.telematik,A,300,127.0.0.49
+shop.router.telematik,A,300,127.0.0.50
