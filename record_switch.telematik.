@@ -1,5 +1,0 @@
-switch.telematik.,SOA,100,127.0.0.44
-switch.telematik.,A,300,127.0.0.45
-switch.telematik.,MX,300,mail.switch.telematik
-www.switch.telematik.,A,300,127.0.0.46
-mail.switch.telematik.,A,300,127.0.0.67
