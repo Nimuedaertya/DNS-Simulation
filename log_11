@@ -1,7 +1,0 @@
-2021-11-18  18:4:58  A11  SERVER STARTING
-2021-11-18  18:4:58  A11  SERVER LISTENING
-2021-11-18  18:5:7  A11  MSG RECV FROM: 127.0.0.1:34854
-     dns.flags.response: 0
-     dns.flags.recdesired: 1
-     dns.qry.name: test.de
-     dns.qry.type: 2
