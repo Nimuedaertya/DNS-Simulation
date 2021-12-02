@@ -5,6 +5,8 @@ import sys
 import socket
 import json
 import time as t
+import random
+import datetime
 
 #init   ####################################
 
@@ -56,11 +58,11 @@ def put_log(msg, ls: dict = None):
 
     #returns timestamp for log file
 def time():
-    a = t.localtime()
-    tmp = str(a.tm_year) + "-" +str( a.tm_mon) + "-" + str(a.tm_mday)
-    tmp += "  " + str(a.tm_hour) + ":"+ str(a.tm_min) + ":" + str(a.tm_sec) + "  "
-    return tmp
-
+    #a = time.localtime()
+    #tmp = str(a.tm_year) + "-" +str( a.tm_mon) + "-" + str(a.tm_mday)
+    #tmp += "  " + str(a.tm_hour) + ":"+ str(a.tm_min) + ":" + str(a.tm_sec) + "  "
+    #return tmp
+    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     ########### PACK / UNPACKING MSG ####
 
     #transforms dictionary into binary string for UDP connection
@@ -131,7 +133,22 @@ def give_error(msg) -> dict:
     msg["dns.count.answers"] = 0
     msg["dns.flags.rcode"] = 5
     return msg
+########## Send MSG #################
 
+def send(ip, port, message):
+    put_log(f'MSG SEND TO: {ip}:{port}', message)
+    if not (type(message) == dict):
+        print("ERROR: NO DICTIONARY")
+    
+    msg = pack(message)
+    #t.sleep(0.1)
+    sock.sendto(msg, (ip, port))
+def send_with_delay(delay,ip,port,message):
+    sleeping_time=(random.randint(delay, delay*10))/1000 
+    put_log(f'SENDING DELAY FOR RESOLVER IS ABOUT {sleeping_time} milliseconds')
+    t.sleep(sleeping_time)
+    send(ip, port, message)
+################################################################
 
 record_types = {"A": 1, "NS":2, "SOA": 6, "MX": 15}
 def create_answer(msg) -> dict:
@@ -193,15 +210,16 @@ put_log("SERVER LISTENING")
 
 while True:
     data, addr = sock.recvfrom(2000) # buffer size is 1024 bytes
-    
+    ip, port = addr[0], addr[1]
         # if data has been send => transfrom back to dictionary (js)
     if data:
         msg = unpack(data)
-        put_log("MSG RECV FROM: " + str(addr[0]) + ":" +str(addr[1]) , msg)
+        put_log("MSG RECV FROM: " + str(ip) + ":" +str(port) , msg)
         
         msg = create_answer(msg)
         
-        put_log("MSG SEND TO: " + str(addr[0]) + ":" + str(addr[1]), msg)
-        msg = pack(msg)
-        t.sleep(2)
-        sock.sendto(msg, addr)
+        put_log("MSG SEND TO: " + str(ip) + ":" + str(port), msg)
+        #msg = pack(msg)
+        #t.sleep(2)
+        #sock.sendto(msg, addr)
+        send_with_delay(100, ip, port, msg )

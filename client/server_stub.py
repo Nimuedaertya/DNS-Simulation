@@ -2,6 +2,8 @@ import time as t
 import sys
 import socket
 import json
+import datetime
+import random
 
 ############ init #############
 
@@ -68,17 +70,24 @@ print("message: %s" % msg)
 #create socket and send binary string to auth_server/rec_resolver
 sock = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
-tx = timer()
+start_time = datetime.datetime.now() #timer()
+sleeping_time=(random.randint(100, 100*10))/1000
+print(f'Start sleeping for {sleeping_time}')
+t.sleep(sleeping_time)
+print('End sleeping client')
 sock.sendto(msg, (UDP_IP, UDP_PORT))
-t0 = timer()
-while (timer() - t0) < 1:
+#Time needed = timer() #????
+#while (timer() - t0) < 1:
+needed_time = None
+while (datetime.datetime.now() - start_time) < datetime.timedelta(seconds=1):
     data, addr = sock.recvfrom(1000)
     if data:
+        needed_time = datetime.datetime.now() - start_time
         break
 data = unpack(data)
 
 print(" [  ANSWERS  ] ")
-print("Time needed: " + str(timer()-tx))
+print(f'Time needed: {needed_time}')
 
 if data["dns.count.answers"] >= 1:
     print("IP-Adress found: ", data["dns.a"])

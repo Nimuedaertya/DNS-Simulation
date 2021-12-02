@@ -1,12 +1,12 @@
 #!/bin/bash
 
 pkill -f auth_server
-pkill -f rec_resolver
+#pkill -f rec_resolver
 
 cd auth_server/
 
-rm *.log
-rm ..log
+rm ./auth_server/*.log
+rm ./auth_server/..log
 
 python3 ../rec_resolver/rec_resolver.py &
 python3 auth_server.py record_. &
@@ -21,6 +21,6 @@ python3 ../client/server_stub.py
 sleep 3
 
 pkill -f auth_server
-pkill -f rec_resolver
+#pkill -f rec_resolver
 
 
